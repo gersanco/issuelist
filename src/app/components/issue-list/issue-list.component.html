@@ -1,3 +1,20 @@
-<p>
-  issue-list works!
-</p>
+<div *ngIf="issues">
+  <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+  <thead>
+    <tr>
+      <th class="mdl-data-table__cell--non-numeric">State</th>
+      <th>Title</th>
+      <th>User</th>
+      <th>Updated</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let issue of issues">
+      <td class="mdl-data-table__cell--non-numeric">{{issue.state}}</td>
+      <td>{{issue.title}}</td>
+      <td>{{issue.user.login}}</td>
+      <td>{{issue.updated_at}}</td>
+    </tr>
+  </tbody>
+</table>
+</div>
