@@ -10,8 +10,8 @@ export class IssueService {
     this.url = `https://api.github.com/repos/`;
   }
 
-  getIssues(){
-    return this._http.get(this.url)
+  getIssues(url:string){
+    return this._http.get(this.url + url)
                         .map(res => res.json());
   }
 
