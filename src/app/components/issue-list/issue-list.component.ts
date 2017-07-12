@@ -26,7 +26,7 @@ export class IssueListComponent implements OnInit {
   }
 
   getIssues() {
-    let url = `${this.repository.owner}/${this.repository.rep}/issues`;
+    let url = `${this.repository.owner}/${this.repository.rep}/issues?state=all`;
     this._issueService.getIssues(url).subscribe(
       resp => {
         this.issues = resp;

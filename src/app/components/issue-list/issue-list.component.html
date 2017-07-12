@@ -1,20 +1,29 @@
 <div *ngIf="issues">
-  <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
-  <thead>
-    <tr>
-      <th class="mdl-data-table__cell--non-numeric">State</th>
-      <th>Title</th>
-      <th>User</th>
-      <th>Updated</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let issue of issues">
-      <td class="mdl-data-table__cell--non-numeric">{{issue.state}}</td>
-      <td>{{issue.title}}</td>
-      <td>{{issue.user.login}}</td>
-      <td>{{issue.updated_at}}</td>
-    </tr>
-  </tbody>
-</table>
+  <h3>Issues: {{issues.length}}</h3>
+  <div class="mdl-card mdl-shadow--4dp card">
+    <div class="mdl-card__supporting-text">
+      <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+        <thead>
+          <tr>
+            <th class="mdl-data-table__cell--non-numeric">State</th>
+            <th>Title</th>
+            <th>User</th>
+            <th>Updated</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let issue of issues">
+            <td class="mdl-data-table__cell--non-numeric">{{issue.state}}</td>
+            <td>{{issue.title}}</td>
+            <td>{{issue.user.login}}</td>
+            <td>{{issue.updated_at}}</td>
+            <td>
+              <a class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" href="{{issue.html_url}}" target="_blank">Go</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
