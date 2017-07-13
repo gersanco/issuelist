@@ -1,28 +1,28 @@
 # Issuelist
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.2.0.
+Lista las Issues de un repositorio de GitHub.
 
-## Development server
+#Requsitos
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+* NodeJS y npm
+* Navegador web
 
-## Code scaffolding
+# Puesta en marcha
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|module`.
+Descargar el proyecto, situarte en el directorio en la consola de comandos y hacer un npm install.
+Una vez instalado los paquetes utilizar el comando npm start.
 
-## Build
+# Estructura
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+Dentro del directorio app tendremos 3 directorios:
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+* components: Aqui se encuentran todos los componentes salvo el principal. Dentro encontramos:
+  * issue-list: Este es el componente que obtiene las issues y las visualiza.
+* models: En este directorio se encuentran los modelos utilizados por los componentes para su intreraccion en la aplicacion. Encontramos:
+  * issue-page: Contiene la pagina en la que se encuentra las issues correspondientes
+  * repository: El nombre completo del repositorio a obtener las issue
+* services: Los servicios que utiliza la aplicacion para obtner las issues.
+  * issue: Este es el servicio que obtiene la issue al que llama el componente
+  * shared: Este servicio sirve de comunicacion entre el componente principal y el componente issue-list. El componente principal le envia el repositorio y el componente issue-list que esta observando esperando la respuesta para poder obtener las issues del repositorio que haya sido enviado.
+* componente principal: Su funcion es obtener del usuario el nombre del usuario y el repositorio a obtener las issues y enviarselo al componente issue-list.
+* app.module: Carga los modulos de la aplicacion y carga servicio shared en memoria para que pueda usarse en toda la app
