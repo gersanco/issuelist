@@ -1,7 +1,7 @@
 <div *ngIf="issues">
   <h3>Issues: {{issues.length}}</h3>
   <div class="mdl-card mdl-shadow--4dp card">
-    <div class="mdl-card__supporting-text">
+    <div class="mdl-card__supporting-text cardText">
       <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
         <thead>
           <tr>
@@ -25,5 +25,13 @@
         </tbody>
       </table>
     </div>
+  </div>
+  <div class="pagination">
+    <label *ngFor="let pg of issuesPag" (click)="setPage(pg)">
+      <span *ngIf="pg.pag == pages; else other">
+        <span active #active>{{pg.pag}}</span>
+      </span>
+      <ng-template #other><span>{{pg.pag}}</span></ng-template>
+    </label>
   </div>
 </div>
