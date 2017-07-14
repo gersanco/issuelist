@@ -7,6 +7,18 @@ body {
   overflow-y: hidden;
 }
 
+ul {
+  list-style: none;
+  width: 80%;
+}
+
+li {
+  float: left;
+  margin-left: -50px;
+  margin-bottom: 10px;
+  margin-right: 80px;
+}
+
 .card {
   margin-top: 2%;
   width: 80%;
@@ -24,8 +36,10 @@ body {
 }
 
 .pagination{
+  clear: both;
   font-size: 20px;
   text-align: left;
+  width: 90%;
 }
 
 .pagination span{
@@ -61,10 +75,5 @@ body {
   body {
     overflow-x: auto;
     overflow-y: auto;
-  }
-
-  .card {
-    width: 500%;
-    height: 596px;
   }
 }

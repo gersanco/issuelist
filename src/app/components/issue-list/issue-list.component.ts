@@ -10,6 +10,7 @@ import { SharedService  } from '../../services/shared.service';
   providers: [IssueService]
 })
 export class IssueListComponent implements OnInit {
+  public totalIssues:Number;
   public pages:number;
   public issuesPag:any[];
   private issuePerPage:Number;
@@ -19,6 +20,7 @@ export class IssueListComponent implements OnInit {
     private _issueService: IssueService,
     private _sharedService: SharedService
   ) {
+    this.totalIssues = 0;
     this.pages = 1;
     this.issuePerPage = 8;
     this.issuesPag = [];
@@ -33,11 +35,13 @@ export class IssueListComponent implements OnInit {
   }
 
   getIssues() {
-    let url = `${this.repository.owner}/${this.repository.rep}/issues?state=all`;
+    let url = `${this.repository.owner}/${this.repository.rep}/issues?state=all&per_page=10000`;
     this._issueService.getIssues(url).subscribe(
       resp => {
         this.issues = resp;
+        this.totalIssues = this.issues.length;
         if(this.issues.length > 0) {
+          this.issuesPag = [];
           let pag = 1;
           let issePg = new IssuePage(pag, []);
           for(let issue of this.issues) {
@@ -48,6 +52,7 @@ export class IssueListComponent implements OnInit {
               issePg = new IssuePage(pag, []);
             }
           }
+          this.issuesPag.push(issePg);
           console.log(this.issuesPag)
           this.issues = this.issuesPag[0].issues;
         }

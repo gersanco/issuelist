@@ -1,31 +1,5 @@
 <div *ngIf="issues">
-  <h3>Issues: {{issues.length}}</h3>
-  <div class="mdl-card mdl-shadow--4dp card">
-    <div class="mdl-card__supporting-text cardText">
-      <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
-        <thead>
-          <tr>
-            <th class="mdl-data-table__cell--non-numeric">State</th>
-            <th>Title</th>
-            <th>User</th>
-            <th>Updated</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let issue of issues">
-            <td class="mdl-data-table__cell--non-numeric">{{issue.state}}</td>
-            <td>{{issue.title}}</td>
-            <td>{{issue.user.login}}</td>
-            <td>{{issue.updated_at}}</td>
-            <td>
-              <a class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" href="{{issue.html_url}}" target="_blank">Go</a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
+  <h3>Issues: {{totalIssues}}</h3>
   <div class="pagination">
     <label *ngFor="let pg of issuesPag" (click)="setPage(pg)">
       <span *ngIf="pg.pag == pages; else other">
@@ -34,4 +8,20 @@
       <ng-template #other><span>{{pg.pag}}</span></ng-template>
     </label>
   </div>
+  <ul>
+    <li *ngFor="let issue of issues">
+      <div class="mdl-card mdl-shadow--4dp">
+        <div class="mdl-card__title mdl-card--expand">
+          <h4 class="mdl-card__title-text">{{issue.title}}</h4>
+        </div>
+        <div class="mdl-card__supporting-text cardText">
+          <p>{{issue.user.login}}</p>
+          <span>{{issue.updated_at}}</span>
+        </div>
+        <div class="mdl-card__actions">
+          <a class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" href="{{issue.html_url}}" target="_blank">Go</a>
+        </div>
+      </div>
+    </li>
+  </ul>
 </div>

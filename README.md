@@ -2,7 +2,7 @@
 
 Lista las Issues de un repositorio de GitHub.
 
-#Requsitos
+# Requsitos
 
 * NodeJS y npm
 * Navegador web
