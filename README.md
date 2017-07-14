@@ -1,6 +1,6 @@
 # Issuelist
 
-Lista las Issues de un repositorio de GitHub.
+Lista las Issues abiertas de un repositorio de GitHub.
 
 # Requsitos
 
