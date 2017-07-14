@@ -7,6 +7,11 @@ body {
   overflow-y: hidden;
 }
 
+.title {
+  font-weight: 600;
+  cursor: pointer;
+}
+
 ul {
   list-style: none;
   width: 80%;
@@ -17,22 +22,7 @@ li {
   margin-left: -50px;
   margin-bottom: 10px;
   margin-right: 80px;
-}
-
-.card {
-  margin-top: 2%;
-  width: 80%;
-  height: 596px;
-  margin-bottom: 20px;
-}
-
-.cardText {
-  padding-top: 2%;
-  padding-left: 4%;
-}
-
-.card table {
-  width: 100%;
+  cursor: pointer;
 }
 
 .pagination{
@@ -40,6 +30,7 @@ li {
   font-size: 20px;
   text-align: left;
   width: 90%;
+  margin-bottom: 30px;
 }
 
 .pagination span{
@@ -70,6 +61,16 @@ li {
   margin-right: 10px;
 }
 
+.error {
+  width: 87%;
+  border-radius: 17px;
+  background: red;
+}
+
+.error h3{
+  padding-left: 50px;
+  color: white;
+}
 
 @media (max-width: 480px) {
   body {

@@ -16,10 +16,12 @@ export class IssueListComponent implements OnInit {
   private issuePerPage:Number;
   public repository: Repository;
   public issues:any[];
+  public error:any;
   constructor(
     private _issueService: IssueService,
     private _sharedService: SharedService
   ) {
+    // this.issues = [];
     this.totalIssues = 0;
     this.pages = 1;
     this.issuePerPage = 8;
@@ -35,10 +37,29 @@ export class IssueListComponent implements OnInit {
   }
 
   getIssues() {
-    let url = `${this.repository.owner}/${this.repository.rep}/issues?state=all&per_page=10000`;
+    let url = `${this.repository.owner}/${this.repository.rep}/issues?state=all&page=1&per_page=1000`;
     this._issueService.getIssues(url).subscribe(
       resp => {
+        this.error= null;
         this.issues = resp;
+        this.getIssuesPerPage(2);
+        console.log(this.issues)
+      }, err => {
+        console.log(err);
+        this.error = JSON.parse(err._body);
+        console.log(this.error)
+      }
+    )
+  }
+
+  getIssuesPerPage(page) {
+    let url = `${this.repository.owner}/${this.repository.rep}/issues?state=all&page=${page}&per_page=1000`;
+    this._issueService.getIssues(url).subscribe(
+      resp => {
+        page++;
+        this.issues = this.issues.concat(resp);
+        this.getIssuesPerPage(page);
+      }, err => {
         this.totalIssues = this.issues.length;
         if(this.issues.length > 0) {
           this.issuesPag = [];
@@ -56,11 +77,7 @@ export class IssueListComponent implements OnInit {
           console.log(this.issuesPag)
           this.issues = this.issuesPag[0].issues;
         }
-        console.log(this.issues)
-      }, err => {
-        console.log(err);
-      }
-    )
+      });
   }
 
   last() {
@@ -76,6 +93,10 @@ export class IssueListComponent implements OnInit {
   setPage(pag) {
     this.issues = pag.issues;
     this.pages = pag.pag;
+  }
+
+  openIssue(issue) {
+    let win = window.open(issue.html_url, '_blank');
   }
 
 }
