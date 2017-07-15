@@ -14,6 +14,7 @@ export class IssueListComponent implements OnInit {
   public pages:number;
   public issuesPag:any[];
   private issuePerPage:Number;
+  public issueList:any[];
   public repository: Repository;
   public issues:any[];
   public error:any;
@@ -40,12 +41,13 @@ export class IssueListComponent implements OnInit {
   }
 
   getIssues() {
-    let url = `${this.repository.owner}/${this.repository.rep}/issues?state=all&page=1&per_page=1000`;
+    let url = `${this.repository.owner}/${this.repository.rep}/issues?open=all&page=1&per_page=1000`;
     this._issueService.getIssues(url).subscribe(
       resp => {
         this.error= null;
         this.issues = resp;
-        this.pagination();
+        // this.pagination();
+        this.loading = false;
         this.getIssuesPerPage(2);
         console.log(this.issues)
       }, err => {
@@ -58,12 +60,12 @@ export class IssueListComponent implements OnInit {
   }
 
   getIssuesPerPage(page) {
-    let url = `${this.repository.owner}/${this.repository.rep}/issues?state=open&page=${page}&per_page=1000`;
+    let url = `${this.repository.owner}/${this.repository.rep}/issues?open=all&page=${page}&per_page=1000`;
     this._issueService.getIssues(url).subscribe(
       resp => {
         page++;
         this.issues = this.issues.concat(resp);
-        this.pagination();
+        // this.pagination();
         this.getIssuesPerPage(page);
       }, err => {
         this.loading = false;
@@ -72,17 +74,17 @@ export class IssueListComponent implements OnInit {
   }
 
   last() {
-    this.issues = this.issuesPag[this.issuesPag.length-1].issues;
+    this.issueList = this.issuesPag[this.issuesPag.length-1].issues;
     this.pages = this.issuesPag.length;
   }
 
   first() {
-    this.issues = this.issuesPag[0].issues;
+    this.issueList = this.issuesPag[0].issues;
     this.pages = 1;
   }
 
   setPage(pag) {
-    this.issues = pag.issues;
+    this.issueList = pag.issues;
     this.pages = pag.pag;
   }
 
@@ -91,6 +93,7 @@ export class IssueListComponent implements OnInit {
   }
 
   pagination() {
+    console.log('PAG')
     this.totalIssues = this.issues.length;
     if(this.issues.length > 0) {
       this.issuesPag = [];
@@ -104,8 +107,9 @@ export class IssueListComponent implements OnInit {
           issePg = new IssuePage(pag, []);
         }
       }
-      this.issuesPag.push(issePg);
-      this.issues = this.issuesPag[0].issues;
+      if(issePg.issues.length > 0)
+        this.issuesPag.push(issePg);
+      this.issueList = this.issuesPag[0].issues;
     }
   }
 

@@ -1,6 +1,6 @@
 <div *ngIf="!loading; else load">
   <div *ngIf="!error; else err">
-    <div *ngIf="issues">
+    <div *ngIf="issueList">
       <h3>Issues: {{totalIssues}}</h3>
       <div class="pagination">
         <label *ngFor="let pg of issuesPag" (click)="setPage(pg)">
@@ -11,7 +11,7 @@
         </label>
       </div>
       <ul>
-        <li *ngFor="let issue of issues" (click)="openIssue(issue)">
+        <li *ngFor="let issue of issueList" (click)="openIssue(issue)">
           <div class="mdl-card mdl-shadow--4dp">
             <div class="mdl-card__title mdl-card--expand">
               <label class="title">{{issue.title}}</label>
